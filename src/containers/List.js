@@ -20,6 +20,12 @@ import {
 
 class List extends Component {
 
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
+
   handleDeleteList = () => {
     const { deleteList, listId } = this.props;
     deleteList(listId);
@@ -50,6 +56,7 @@ class List extends Component {
       <div
         style={Object.assign({}, { opacity })}
         className={"list-item"}
+        ref={this.myRef}
       >
         <div className="list-title">
           <Input
@@ -60,7 +67,7 @@ class List extends Component {
             onChange={this.handleChangeTitle}
             value={title || ""}
           />
-          <Button onClick={this.handleDeleteList}>
+          <Button href="" onClick={this.handleDeleteList}>
             <i className="material-icons">
               delete
             </i>
@@ -103,15 +110,31 @@ const ListWithDnD = DropTarget(
           .filter(card =>card.id === props.draggableCard.id).length) {
           return
         } else {
-          const newIndex = props.lists.find(list => list.listId === hoverListId).cardList.length;
-          props.changeListForCard(dragListId, hoverListId, newIndex);
-          props.setDraggableCard({
-            ...props.draggableCard,
-            index: newIndex,
-            listId: hoverListId
-          });
-          monitor.getItem().index = newIndex;
-          monitor.getItem().listId = hoverListId;
+          const hoverBoundingRect = component.myRef.current.getBoundingClientRect();
+          const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+          const clientOffset = monitor.getClientOffset();
+          const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+          if (hoverMiddleY > hoverClientY) {
+            props.changeListForCard(dragListId, hoverListId, 0);
+            props.setDraggableCard({
+              ...props.draggableCard,
+              index: 0,
+              listId: hoverListId
+            });
+            monitor.getItem().index = 0;
+            monitor.getItem().listId = hoverListId;
+          } else {
+            const newIndex = props.lists.find(list => list.listId === hoverListId).cardList.length;
+            props.changeListForCard(dragListId, hoverListId, newIndex);
+            props.setDraggableCard({
+              ...props.draggableCard,
+              index: newIndex,
+              listId: hoverListId
+            });
+            monitor.getItem().index = newIndex;
+            monitor.getItem().listId = hoverListId;
+          }
         }
       }
       if (targetType === ItemTypes.LIST) {
