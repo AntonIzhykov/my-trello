@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-image: url("https://avatars.mds.yandex.net/get-pdb/985791/a7739765-a925-46be-8d02-9ad81e5cff1b/s1200");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 .App-logo {
@@ -24,24 +29,41 @@
 }
 
 .list-item {
-  /*width: 30%;*/
-  /*height: 400px;*/
-  background-color: #707070;
+  background-color: #296daabd;
   border-radius: 10px;
   padding: 20px;
-  /*margin: 20px;*/
+  width: 20%;
 }
 
 .list-item,
 .adder-new-item {
   margin: 10px;
+  box-shadow: inset 2px 3px 4px 3px #c3ebfe;
+}
+
+.list-title {
+  background-color: #f0ffff70;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 .card-item {
-  border: 2px dashed white;
+  background: azure;
+  box-shadow: 3px 2px 8px 0px black;
   cursor: pointer;
-  margin: 5px;
+  margin: 10px 0;
   padding: 5px;
+  border-radius: 10px;
+  clear: both;
+  overflow: hidden;
+  word-wrap: break-word;
+  color: #172b4d;
+}
+
+.adder-new-item {
+  background: #0176aade;
+  border-radius: 10px;
+  height: max-content;
 }
 
 .active {

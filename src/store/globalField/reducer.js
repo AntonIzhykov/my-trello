@@ -11,36 +11,20 @@ const initialState = {
   lists: [
     {
       listId: '11111111111111111',
-      title: 'initial column',
+      title: 'Планы на отпуск',
       cardList: [
         {
           id: '1.1',
-          value: '1',
+          value: 'Уехать из города',
           listId: '11111111111111111',
         },
         {
           id: '1.2',
-          value: '2',
+          value: 'Любоваться природой',
           listId: '11111111111111111',
         }
       ],
     },
-    {
-      listId: '2222222222222222',
-      title: 'initial column',
-      cardList: [
-        {
-          id: '2.1',
-          value: '3',
-          listId: '2222222222222222',
-        },
-        {
-          id: '2.2',
-          value: '4',
-          listId: '2222222222222222',
-        }
-      ],
-    }
   ],
   draggableCard: {},
   draggableListId: '',

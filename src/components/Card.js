@@ -15,7 +15,6 @@ const Card = React.forwardRef(
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
     const opacity = id === draggableCard.id ? 0.1 : 1;
-    let backgroundColor = "red";
 
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
@@ -28,7 +27,7 @@ const Card = React.forwardRef(
     return (
       <div
         ref={elementRef}
-        style={Object.assign({}, { opacity, backgroundColor })}
+        style={Object.assign({}, { opacity })}
         className="card-item"
       >
         <span>{value}</span>
@@ -150,7 +149,7 @@ const CardWithDnD =
       },
       endDrag: (props) => {
         props.setDraggableCard({})
-      }
+      },
     },
     (connect, monitor) => ({
       connectDragSource: connect.dragSource(),
